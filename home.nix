@@ -13,6 +13,9 @@
 
     # editor
     helix
+
+    # utils
+    gitui
   ];
 
   programs.git = {
@@ -42,5 +45,9 @@
       theme = "onelight";
       editor.true-color = true;
     };
+  };
+
+  programs.gitui = {
+    enable = true;
   };
 }
