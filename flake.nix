@@ -24,6 +24,9 @@
           # lsp
           nil
           nixd
+
+          # gemini
+          gemini-cli
         ];
 
         users.users.nixos.shell = pkgs.nushell;
