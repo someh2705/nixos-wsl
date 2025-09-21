@@ -2,21 +2,6 @@
 
 {
   home.stateVersion = "25.05";
-  
-  home.packages = with pkgs; [
-    git
-    
-    # shell
-    nushell
-    zoxide
-    starship
-
-    # editor
-    helix
-
-    # utils
-    gitui
-  ];
 
   programs.git = {
     enable = true;
@@ -40,6 +25,16 @@
 
   programs.atuin = {
     enable = true;
+  };
+
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+
+    settings = {
+      theme = "catppuccin-latte";
+      default_layout = "compact";
+    };
   };
   
   programs.helix = {
