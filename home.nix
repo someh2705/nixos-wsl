@@ -11,6 +11,12 @@
 
   programs.bash = {
     enable = true;
+    shellAliases = {
+      # eza
+      ls = "eza --color=always --group-directories-first --icons";
+      ll = "eza -la --icons --octal-permissions --group-directories-first";
+      lt = "eza -laT --icons --level=2 --color=always --group-directories-first";
+    };
   };
 
   programs.zoxide = {
@@ -35,6 +41,11 @@
       theme = "catppuccin-latte";
       default_layout = "compact";
     };
+  };
+
+  programs.eza = {
+    enable = true;
+    enableBashIntegration = true;
   };
   
   programs.helix = {
