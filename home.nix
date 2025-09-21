@@ -38,6 +38,9 @@
     enableBashIntegration = true;
   };
 
+  programs.atuin = {
+    enable = true;
+  };
   
   programs.helix = {
     enable = true;
