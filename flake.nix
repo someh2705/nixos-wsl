@@ -29,8 +29,6 @@
           gemini-cli
         ];
 
-        users.users.nixos.shell = pkgs.nushell;
-
         system.stateVersion = "25.05";
       };
 

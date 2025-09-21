@@ -24,20 +24,21 @@
     userEmail = "someh2705@gmail.com";
   };
 
-  programs.nushell = {
+  programs.bash = {
     enable = true;
   };
 
   programs.zoxide = {
     enable = true;
-    enableNushellIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.starship = {
     enable = true;
-    enableNushellIntegration = true;
+    enableBashIntegration = true;
   };
 
+  
   programs.helix = {
     enable = true;
     defaultEditor = true;
