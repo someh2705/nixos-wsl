@@ -24,9 +24,6 @@
           # lsp
           nil
           nixd
-
-          # gemini
-          gemini-cli
         ];
 
         system.stateVersion = "25.05";
