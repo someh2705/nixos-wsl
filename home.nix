@@ -51,6 +51,10 @@ in
     enableBashIntegration = true;
   };
 
+  programs.ripgrep = {
+    enable = true;    
+  };
+
   xdg.configFile."helix" = {
     source = mkSymlink "${dotfiles}/helix/";
     recursive = true;
