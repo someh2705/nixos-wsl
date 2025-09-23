@@ -53,7 +53,12 @@
 
             home-manager.nixosModules.home-manager
             {
-              home-manager.users.nixos = import ./home.nix;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true; 
+                users.nixos = import ./home.nix;
+                backupFileExtension = "backup";
+              };
             }
           ];
         };

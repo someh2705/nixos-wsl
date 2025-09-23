@@ -1,5 +1,8 @@
-{ pkgs, ... }:
-
+{ config, pkgs, ... }:
+let
+  dotfiles = "${config.home.homeDirectory}/nixos-wsl/config";
+  mkSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
+in
 {
   home.stateVersion = "25.05";
 
@@ -33,28 +36,29 @@
     enable = true;
   };
 
+  xdg.configFile."zellij" = {
+    source = mkSymlink "${dotfiles}/zellij/";
+    recursive = true;
+  };
+
   programs.zellij = {
     enable = true;
     enableBashIntegration = true;
-
-    settings = {
-      theme = "catppuccin-latte";
-      default_layout = "compact";
-    };
   };
 
   programs.eza = {
     enable = true;
     enableBashIntegration = true;
   };
+
+  xdg.configFile."helix" = {
+    source = mkSymlink "${dotfiles}/helix/";
+    recursive = true;
+  };
   
   programs.helix = {
     enable = true;
     defaultEditor = true;
-    settings = {
-      theme = "onelight";
-      editor.true-color = true;
-    };
   };
 
   programs.gitui = {
