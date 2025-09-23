@@ -20,6 +20,7 @@
 
         environment.systemPackages = with pkgs; [
           git
+          nvd
 
           # lsp
           nil
