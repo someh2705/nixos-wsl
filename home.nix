@@ -15,6 +15,12 @@ in
   programs.bash = {
     enable = true;
     shellAliases = {
+      # nh
+      ns = "nh os switch . -a";
+      
+      # lazygit
+      lg = "lazygit";
+      
       # eza
       ls = "eza --color=always --group-directories-first --icons";
       ll = "eza -la --icons --octal-permissions --group-directories-first";
@@ -71,7 +77,7 @@ in
     nix-direnv.enable = true;
   };
 
-  programs.gitui = {
+  programs.lazygit = {
     enable = true;
   };
 }
