@@ -2,3 +2,10 @@ theme = "onelight"
 
 [editor]
 true-color = true
+auto-format = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-inlay-hints = true
