@@ -11,80 +11,72 @@
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      nixos-wsl,
-      home-manager,
-      ...
-    }:
-    let
-      system = "x86_64-linux";
+  outputs = {
+    nixpkgs,
+    nixos-wsl,
+    home-manager,
+    ...
+  }: let
+    system = "x86_64-linux";
 
-      system-module =
-        { pkgs, ... }:
-        {
-          nix.settings.experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
+    system-module = {pkgs, ...}: {
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
-          environment.systemPackages = with pkgs; [
-            git
-            nh
-            mkcert
+      environment.systemPackages = with pkgs; [
+        git
+        nh
+        mkcert
 
-            # nix
-            nil
-            nixd
-            nixfmt-rfc-style
+        # nix
+        nil
+        nixd
+        alejandra
 
-            # toml
-            tombi
-          ];
+        # toml
+        tombi
+      ];
 
-          system.stateVersion = "25.05";
-        };
+      system.stateVersion = "25.05";
+    };
 
-      nixos-wsl-module =
-        { ... }:
-        {
-          wsl = {
-            enable = true;
-            defaultUser = "nixos";
+    nixos-wsl-module = {...}: {
+      wsl = {
+        enable = true;
+        defaultUser = "nixos";
 
-            wslConf = {
-              interop = {
-                appendWindowsPath = false;
-              };
-            };
+        wslConf = {
+          interop = {
+            appendWindowsPath = false;
           };
-        };
-
-    in
-    {
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit home-manager; };
-
-          modules = [
-            system-module
-
-            nixos-wsl.nixosModules.wsl
-            nixos-wsl-module
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.nixos = import ./home.nix;
-                backupFileExtension = "backup";
-              };
-            }
-          ];
         };
       };
     };
+  in {
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit home-manager;};
+
+        modules = [
+          system-module
+
+          nixos-wsl.nixosModules.wsl
+          nixos-wsl-module
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.nixos = import ./home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
+    };
+  };
 }

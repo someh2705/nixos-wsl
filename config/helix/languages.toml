@@ -8,10 +8,9 @@ auto-format = true
 
 [[language]]
 name = "nix"
-formatter = { command = "nixfmt" }
+formatter = { command = "alejandra" }
 auto-format = true
 
 [[language]]
 name = "toml"
 auto-format = true
-

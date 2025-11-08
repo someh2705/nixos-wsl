@@ -1,9 +1,11 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-wsl/config";
   mkSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
-in
-{
+in {
   home.stateVersion = "25.05";
 
   programs.git = {
@@ -17,10 +19,10 @@ in
     shellAliases = {
       # nh
       ns = "nh os switch . -a";
-      
+
       # lazygit
       lg = "lazygit";
-      
+
       # eza
       ls = "eza --color=always --group-directories-first --icons";
       ll = "eza -la --icons --octal-permissions --group-directories-first";
@@ -58,14 +60,14 @@ in
   };
 
   programs.ripgrep = {
-    enable = true;    
+    enable = true;
   };
 
   xdg.configFile."helix" = {
     source = mkSymlink "${dotfiles}/helix/";
     recursive = true;
   };
-  
+
   programs.helix = {
     enable = true;
     defaultEditor = true;
