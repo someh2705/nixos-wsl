@@ -8,6 +8,10 @@
 in {
   home.stateVersion = "25.05";
 
+  home.packages = with pkgs; [
+    babashka
+  ];
+
   programs.git = {
     enable = true;
     userName = "someh2705";
@@ -41,6 +45,10 @@ in {
   };
 
   programs.atuin = {
+    enable = true;
+  };
+
+  programs.yazi = {
     enable = true;
   };
 

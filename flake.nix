@@ -28,6 +28,7 @@
       environment.systemPackages = with pkgs; [
         git
         nh
+        wget
         mkcert
 
         # nix
