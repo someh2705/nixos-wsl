@@ -11,33 +11,58 @@
     };
   };
 
-  outputs = { nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs =
+    {
+      nixpkgs,
+      nixos-wsl,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
 
-      system-module = { pkgs, ... }: {
-        nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      system-module =
+        { pkgs, ... }:
+        {
+          nix.settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
 
-        environment.systemPackages = with pkgs; [
-          git
-          nh
+          environment.systemPackages = with pkgs; [
+            git
+            nh
+            mkcert
 
-          # lsp
-          nil
-          nixd
-        ];
+            # nix
+            nil
+            nixd
+            nixfmt-rfc-style
 
-        system.stateVersion = "25.05";
-      };
+            # toml
+            tombi
+          ];
 
-      nixos-wsl-module = { ... }: {
-        wsl = {
-          enable = true;
-          defaultUser = "nixos";
+          system.stateVersion = "25.05";
         };
-      };
-      
-    in {
+
+      nixos-wsl-module =
+        { ... }:
+        {
+          wsl = {
+            enable = true;
+            defaultUser = "nixos";
+
+            wslConf = {
+              interop = {
+                appendWindowsPath = false;
+              };
+            };
+          };
+        };
+
+    in
+    {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -45,7 +70,7 @@
 
           modules = [
             system-module
-            
+
             nixos-wsl.nixosModules.wsl
             nixos-wsl-module
 
@@ -53,7 +78,7 @@
             {
               home-manager = {
                 useGlobalPkgs = true;
-                useUserPackages = true; 
+                useUserPackages = true;
                 users.nixos = import ./home.nix;
                 backupFileExtension = "backup";
               };

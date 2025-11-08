@@ -1,8 +1,11 @@
-theme = "onelight"
+theme = "catppuccin_latte"
 
 [editor]
 true-color = true
 auto-format = true
+
+[editor.indent-guides]
+render = true
 
 [editor.file-picker]
 hidden = false
