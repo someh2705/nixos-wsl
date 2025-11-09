@@ -1,5 +1,6 @@
+theme = "ayu_light"
 # theme = "catppuccin_latte"
-theme = "catppuccin_mocha"
+# theme = "catppuccin_mocha"
 
 [editor]
 true-color = true
